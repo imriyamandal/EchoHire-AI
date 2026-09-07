@@ -19,11 +19,21 @@
 
 ---
 
-## Demo video 
-![Video Link](https://youtu.be/1EAQQheaNv4?si=N9wyhuPPBaio2GVY)
+---
 
-## Github repo 
-![Repository Link](https://github.com/imriyamandal/EchoHire-AI)
+## 🎬 Demo Video
+
+[![EchoHire AI Demo](https://img.youtube.com/vi/1EAQQheaNv4/maxresdefault.jpg)](https://www.youtube.com/watch?v=1EAQQheaNv4)
+
+[![Watch Demo](https://img.shields.io/badge/▶_Watch_Demo-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=1EAQQheaNv4)
+
+---
+
+## 🔗 GitHub Repository
+
+[![View Source Code](https://img.shields.io/badge/VIEW%20SOURCE%20CODE-GITHUB-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/imriyamandal/EchoHire-AI)
+
+---
 
 ---
 

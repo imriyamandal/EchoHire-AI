@@ -1,6 +1,7 @@
 # 🎙️ EchoHire AI — Project Overview
 
-> **"The Full-Duplex Voice Interview Coach That Listens Like a Human."**
+> **"The Full-Duplex Voice Interview Coach That Listens Like a Human."**  
+> 📄 **[Download 1-Page Solution Architecture PDF (docs/EchoHire_Solution_Architecture.pdf)](docs/EchoHire_Solution_Architecture.pdf)**
 
 ---
 

@@ -1,5 +1,7 @@
 # 🏗️ EchoHire AI — System Architecture
 
+> 📄 **[Download 1-Page Printable Solution Architecture PDF (docs/EchoHire_Solution_Architecture.pdf)](docs/EchoHire_Solution_Architecture.pdf)**
+
 This document describes the high-level architecture, full-duplex voice pipeline, cancellation lifecycle, and data flow of **EchoHire AI**.
 
 ---

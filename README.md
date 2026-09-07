@@ -13,9 +13,17 @@
 
 **EchoHire AI** is a production-grade, full-duplex voice interview AI platform built for the **Rime Voice Hackathon**. Unlike ordinary voice bots that force users into rigid turn-taking, EchoHire AI continuously listens, aborts speech in **sub-20 milliseconds**, cancels server synthesis tasks, and dynamically adapts with **zero stale audio replayed**.
 
-[🚀 Quick Start](#-quick-start) • [📸 Visual Tour](#-visual-tour--application-showcase) • [📐 Architecture](#-system-architecture) • [⚡ Voice Workflow](#-voice-workflow--interruption-lifecycle) • [🔬 Testing & QA](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/TESTING.md) • [📖 Full Docs](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/PROJECT_OVERVIEW.md)
+[🚀 Quick Start](#-quick-start) • [📸 Visual Tour](#-visual-tour--application-showcase) • [📐 Architecture](#-system-architecture) • [📄 1-Page Arch PDF](docs/EchoHire_Solution_Architecture.pdf) • [⚡ Voice Workflow](#-voice-workflow--interruption-lifecycle) • [🔬 Testing & QA](TESTING.md) • [📖 Full Docs](PROJECT_OVERVIEW.md)
 
 </div>
+
+---
+
+## Demo video 
+![Video Link](https://youtu.be/1EAQQheaNv4?si=N9wyhuPPBaio2GVY)
+
+## Github repo 
+![Repository Link](https://github.com/imriyamandal/EchoHire-AI)
 
 ---
 
@@ -128,6 +136,8 @@ EchoHire AI solves this through a **Decoupled Full-Duplex Architecture**:
 ---
 
 ## 📐 System Architecture
+
+> 📄 **[Download 1-Page Solution Architecture PDF (docs/EchoHire_Solution_Architecture.pdf)](docs/EchoHire_Solution_Architecture.pdf)** &nbsp;|&nbsp; *Comprehensive executive architecture brief with sub-20ms interruption flow and benchmark matrix.*
 
 ```mermaid
 flowchart TD

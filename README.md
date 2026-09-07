@@ -2,36 +2,77 @@
 
 <div align="center">
 
-[![Rime Voice Hackathon](https://img.shields.io/badge/Rime_Voice_Hackathon-Winner_Submission-blue?style=for-the-badge&logo=sound)](https://rime.ai)
+[![Rime Voice Hackathon](https://img.shields.io/badge/Rime_Voice_Hackathon-blue?style=for-the-badge&logo=sound)](https://rime.ai)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14_App_Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![LiveKit WebRTC](https://img.shields.io/badge/LiveKit-WebRTC_Agents-FF6B6B?style=for-the-badge&logo=webrtc)](https://livekit.io)
 [![Rime TTS](https://img.shields.io/badge/Primary_Voice-Rime_TTS_(Mist)-7C3AED?style=for-the-badge)](https://rime.ai)
 [![Deepgram STT](https://img.shields.io/badge/STT-Deepgram_Nova--2-13EF93?style=for-the-badge)](https://deepgram.com)
 [![Google Gemini](https://img.shields.io/badge/LLM-Gemini_Flash-4285F4?style=for-the-badge&logo=google)](https://aistudio.google.com)
-[![Tests Passing](https://img.shields.io/badge/Tests-9_Passed_(100%25)-10B981?style=for-the-badge&logo=pytest)](https://github.com)
+[![Tests Passing](https://img.shields.io/badge/Tests-12_Passed_(100%25)-10B981?style=for-the-badge&logo=pytest)](https://github.com)
 
 **EchoHire AI** is a production-grade, full-duplex voice interview AI platform built for the **Rime Voice Hackathon**. Unlike ordinary voice bots that force users into rigid turn-taking, EchoHire AI continuously listens, aborts speech in **sub-20 milliseconds**, cancels server synthesis tasks, and dynamically adapts with **zero stale audio replayed**.
 
-[🚀 Quick Start](#-quick-start) • [📐 Architecture](#-system-architecture) • [⚡ Voice Workflow](#-voice-workflow--interruption-lifecycle) • [🔬 Testing & QA](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/TESTING.md) • [📖 Full Docs](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/PROJECT_OVERVIEW.md)
+[🚀 Quick Start](#-quick-start) • [📸 Visual Tour](#-visual-tour--application-showcase) • [📐 Architecture](#-system-architecture) • [⚡ Voice Workflow](#-voice-workflow--interruption-lifecycle) • [🔬 Testing & QA](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/TESTING.md) • [📖 Full Docs](file:///c:/Users/riya/OneDrive/project/EchoHire-AI/PROJECT_OVERVIEW.md)
 
 </div>
 
 ---
 
-## 📸 Screenshots & Interface Showcase
+## 📸 Visual Tour & Application Showcase
 
 <div align="center">
 
-| **1. Dynamic Landing & Benchmarks** | **2. 3-Step Personalized Onboarding** |
-|:---:|:---:|
-| ![Landing Page](/assets/screenshots/landing.png) | ![Onboarding Wizard](/assets/screenshots/onboarding.png) |
-| *Full-Duplex Hero & Interruption Benchmarks* | *Role, Company, Voice & Mic Verification* |
+### 1. Dynamic Landing Page & Full-Duplex Hero
+![Landing Page](docs/Landing_page.png)
+*Modern responsive landing page featuring real-time interruption benchmarks, voice AI architecture, and feature overview.*
 
-| **3. Live Voice Interview Studio** | **4. Executive PDF Score Report** |
+---
+
+### 2. User Authentication & Session Security
+| **Enterprise Authentication (Sign In & Sign Up)** |
+|:---:|
+| ![Authentication Page](docs/Authentication_page.png) |
+| *Bcrypt-encrypted credentials, JWT stateless tokens, and seamless onboarding redirect.* |
+
+---
+
+### 3. Candidate Analytics & Session Dashboard
+| **Analytics Dashboard & Historical Performance Trends** |
+|:---:|
+| ![Candidate Dashboard](docs/Dashboard.png) |
+| *Historical interview session metrics, overall readiness scores, speech rate (WPM), and filler word trends.* |
+
+---
+
+### 4. 3-Step Personalized Interview Setup
+| **Step 1: Role, Company & Difficulty** | **Step 2: Focus Areas & Language** |
 |:---:|:---:|
-| ![Interview Studio](/assets/screenshots/interview.png) | ![Summary Report](/assets/screenshots/summary.png) |
-| *Voice Orb, Neon Waveform & Live Dialogue* | *STAR Score, Pace (WPM), Fillers & PDF Export* |
+| ![Customizing Role & Company](docs/Customizing_role_company.png) | ![Customizing Focus & Language](docs/Customizing_focus_language.png) |
+| *Target company rubrics (Google, Amazon, Meta, OpenAI) & calibrated roles.* | *Custom topic focus & multilingual support (English, Hindi, Hinglish).* |
+
+| **Step 3: Rime TTS Voice & Audio Hardware Setup** |
+|:---:|
+| ![Voice & Mic Setup](docs/Voice_setup.png) |
+| *Rime voice persona testing (`allison`, `amber`, `creek`, `marsh`, `bayou`) & real-time mic VAD check.* |
+
+---
+
+### 5. Live Full-Duplex Voice Interview Studio
+| **Live Voice Studio (Centerpiece Experience)** |
+|:---:|
+| ![Interview Studio](docs/Interview_studio.png) |
+| *Pulsing neon Voice Orb, dynamic 60 FPS WebAudio visualizer, real-time transcript stream, and sub-20ms barge-in interruption.* |
+
+---
+
+### 6. Comprehensive STAR Score & Executive PDF Report
+| **Comprehensive Analytics & STAR Scorecard** |
+|:---:|
+| ![Interview Report](docs/Interview_report.png) |
+| *Situation-Task-Action-Result scoring, speech pace analysis, filler breakdown, AI recommendations, and high-res PDF export.* |
+
+📄 **[Download Sample Generated PDF Report (docs/EchoHire_Interview_Report.pdf)](docs/EchoHire_Interview_Report.pdf)**
 
 </div>
 
@@ -180,8 +221,9 @@ EchoHire-AI/
 │   ├── test_api.py           # REST Endpoints & Authentication Tests
 │   ├── test_interruption.py  # Sub-50ms Interruption Benchmark Test
 │   ├── test_interview_agent.py # Prompts & STAR Scoring Tests
+│   ├── test_question_progression.py # Deduplication & Natural Stage Progression Tests
 │   └── test_rime_service.py  # Rime TTS Chunk Streaming & WAV Synthesis
-├── docs/                     # Additional Guides & Brand Specs
+├── docs/                     # Application Screenshots, Architecture & PDF Sample
 ├── .env.example              # Environment Configuration Template
 ├── README.md                 # Master Documentation
 └── LICENSE                   # MIT License
@@ -252,7 +294,7 @@ Run the complete test suite:
 ```bash
 python -m pytest tests/ -v
 ```
-All 9 unit & integration tests pass with 100% green status.
+All 12 unit & integration tests pass with 100% green status.
 
 ---
 

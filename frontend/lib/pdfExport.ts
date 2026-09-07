@@ -1,0 +1,176 @@
+import { jsPDF } from "jspdf";
+import { ScoringResult, Message } from "@/types";
+
+export function generateInterviewPDF(
+  scoring: ScoringResult,
+  transcript: Message[],
+  candidateName: string = "Candidate",
+  personaRole: string = "Google Technical Interview",
+  durationFormatted: string = "08:45"
+) {
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4"
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  let y = 20;
+
+  // Background header band
+  doc.setFillColor(11, 17, 32); // #0B1120
+  doc.rect(0, 0, pageWidth, 42, "F");
+
+  // Title & Brand
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(37, 99, 235); // #2563EB Primary
+  doc.text("EchoHire AI", 14, 18);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(148, 163, 184);
+  doc.text("Real-Time Full-Duplex Voice Interview Intelligence Report", 14, 25);
+
+  // Candidate Details Right Header
+  doc.setFontSize(9);
+  doc.setTextColor(255, 255, 255);
+  doc.text(`Candidate: ${candidateName}`, pageWidth - 14, 16, { align: "right" });
+  doc.text(`Role: ${personaRole}`, pageWidth - 14, 22, { align: "right" });
+  doc.text(`Date: ${new Date().toLocaleDateString()} | Duration: ${durationFormatted}`, pageWidth - 14, 28, { align: "right" });
+
+  y = 52;
+
+  // Executive Score Box
+  doc.setFillColor(241, 245, 249);
+  doc.roundedRect(14, y, pageWidth - 28, 38, 3, 3, "F");
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Executive Performance Score", 22, y + 12);
+
+  // Overall Score Big Circle
+  doc.setFontSize(32);
+  doc.setTextColor(37, 99, 235);
+  doc.text(`${scoring.overall_score}`, 22, y + 28);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(100, 116, 139);
+  doc.text("/ 100", 45, y + 28);
+
+  // Mini Score Breakdown Columns
+  const metrics = [
+    { label: "STAR Structure", val: `${scoring.star_score}/100` },
+    { label: "Clarity & Tone", val: `${scoring.clarity_score}/100` },
+    { label: "Confidence", val: `${scoring.confidence_score}/100` },
+    { label: "Technical Depth", val: `${scoring.technical_score}/100` },
+    { label: "Speaking Rate", val: `${scoring.wpm} WPM` },
+    { label: "Filler Words", val: `${scoring.filler_word_count}` },
+  ];
+
+  let colX = 75;
+  metrics.forEach((m, idx) => {
+    const xPos = colX + (idx % 3) * 40;
+    const yPos = idx < 3 ? y + 10 : y + 24;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(100, 116, 139);
+    doc.text(m.label, xPos, yPos);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(15, 23, 42);
+    doc.text(m.val, xPos, yPos + 6);
+  });
+
+  y += 48;
+
+  // Key Strengths
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(16, 185, 129); // Emerald
+  doc.text("✓ Key Strengths", 14, y);
+  y += 6;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(51, 65, 85);
+  scoring.strengths.forEach((s) => {
+    doc.text(`•  ${s}`, 18, y);
+    y += 5.5;
+  });
+
+  y += 4;
+
+  // Areas for Improvement
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(239, 68, 68); // Rose
+  doc.text("⚠ Areas for Improvement", 14, y);
+  y += 6;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(51, 65, 85);
+  scoring.weaknesses.forEach((w) => {
+    doc.text(`•  ${w}`, 18, y);
+    y += 5.5;
+  });
+
+  y += 4;
+
+  // Actionable Coaching Tips
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(124, 58, 237); // Purple
+  doc.text("★ Actionable Coaching Recommendations", 14, y);
+  y += 6;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(51, 65, 85);
+  scoring.tips.forEach((t) => {
+    doc.text(`•  ${t}`, 18, y);
+    y += 5.5;
+  });
+
+  y += 8;
+
+  // Transcript Excerpt Section
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Interview Transcript & Interaction Log", 14, y);
+  y += 6;
+
+  const validTranscript = transcript.filter(t => t.content && t.content.trim().length > 0);
+  for (let i = 0; i < Math.min(validTranscript.length, 10); i++) {
+    const item = validTranscript[i];
+    if (y > 270) {
+      doc.addPage();
+      y = 20;
+    }
+
+    const isAI = item.role === "assistant";
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.5);
+    doc.setTextColor(isAI ? 37 : 16, isAI ? 99 : 185, isAI ? 235 : 129);
+    doc.text(isAI ? `Interviewer (${personaRole}):` : "Candidate:", 14, y);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(51, 65, 85);
+    
+    const lines = doc.splitTextToSize(item.content, pageWidth - 32);
+    doc.text(lines, 18, y + 4.5);
+    y += 6 + lines.length * 4;
+  }
+
+  // Footer note
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(7.5);
+  doc.setTextColor(148, 163, 184);
+  doc.text("Report generated by EchoHire AI Voice Coach • Powered by Rime TTS & LiveKit", pageWidth / 2, 290, { align: "center" });
+
+  doc.save(`EchoHire_Interview_Report_${scoring.overall_score}pts.pdf`);
+}
